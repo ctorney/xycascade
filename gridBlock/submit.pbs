@@ -1,0 +1,11 @@
+
+#PBS -l nodes=1:ppn=4:gpus=4,walltime=0:10:00
+#PBS -j oe
+#PBS -q gpu
+
+
+module load cudatoolkit/5.5.22
+export CUDA_VISIBLE_DEVICES=`grep $HOSTNAME $PBS_GPUFILE | awk -Fu '{printf A$2;A=","}'`
+
+cd $PBS_O_WORKDIR
+./runSwitcher 
